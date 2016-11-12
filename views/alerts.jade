@@ -1,0 +1,39 @@
+doctype html
+html
+	head
+		script(src="/socket.io/socket.io.js")
+		script(src="http://code.jquery.com/jquery-1.11.1.js")
+		link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+		title alertas
+		style.
+			.panelNotifs{
+				width:70%;
+				margin-left : auto;
+				margin-right: auto;
+			}
+	body
+		.row
+			.col-md-12.text-center
+				H1 alertas con nodeschool & socket.io
+
+		.row
+			.col-md-12.text-center
+				.panel.panel-default.panelNotifs
+					.panel-heading Panel
+					
+					.panel-body
+						table(class="table table-striped" id="tableAlerts")
+							thead
+								tr
+									th Quien Envio
+									th Que Vio
+									th Hora
+							tbody
+		script.
+			var socket = io()
+			$(document).ready(function(){
+				socket.on('nueva alerta', function(newAlert){
+					$('#tableAlerts').prepend('<tr> <td>'+newAlert.quienMando+'</td> <td>'+newAlert.queVio+'</td> <td>'+newAlert.dateTime+'</td> </tr>')
+				})
+			})
+			
